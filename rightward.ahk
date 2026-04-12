@@ -1,5 +1,4 @@
 #NoEnv
-#SingleInstance
 SendMode Input
 SetWorkingDir %A_ScriptDir%
 
@@ -15,7 +14,7 @@ air_kick() {
     Send, {s down}       ;press down
     Sleep, 100
 
-    Send, {d down}       ;press forward
+    Send, {d down}       ;press right
     Sleep, 33
 
     Send, {s up}         ;release down
@@ -24,10 +23,10 @@ air_kick() {
     Send, {LButton down} ;press square
     Sleep, 167
 
-    Send, {d up}         ;release forward
+    Send, {d up}         ;release right
     Sleep, 33
     Send, {LButton up}   ;release square
-    Sleep, 100
+    Sleep, 333
 }
 
 jump_cancel() {
@@ -40,7 +39,7 @@ jump_cancel() {
     Send, {MButton down} ;press R2
     Sleep, 20
 
-    Send, {w down}       ;press up
+    Send, {d down}       ;press right
     Sleep, 20
 
     Send, {Space down}   ;press cross
@@ -58,7 +57,7 @@ jump_cancel() {
     Send, {LButton up}   ;release square
     Sleep, 20
 
-    Send, {w up}         ;release up
+    Send, {d up}         ;release right
     Sleep, 33
 }
 
