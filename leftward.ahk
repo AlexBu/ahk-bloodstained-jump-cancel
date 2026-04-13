@@ -10,11 +10,11 @@ first_jump() {
     Sleep, 20
 }
 
-air_kick() {
+air_kick(key, delay :=333) {
     Send, {s down}       ;press down
     Sleep, 100
 
-    Send, {a down}       ;press left
+    Send, {%key% down}       ;press left
     Sleep, 33
 
     Send, {s up}         ;release down
@@ -23,13 +23,13 @@ air_kick() {
     Send, {LButton down} ;press square
     Sleep, 167
 
-    Send, {a up}         ;release left
+    Send, {%key% up}         ;release left
     Sleep, 33
     Send, {LButton up}   ;release square
-    Sleep, 333
+    Sleep, %delay%
 }
 
-jump_cancel() {
+jump_cancel(key) {
     Send, {q down}       ;press R1
     Sleep, 100
 
@@ -39,7 +39,7 @@ jump_cancel() {
     Send, {MButton down} ;press R2
     Sleep, 20
 
-    Send, {a down}       ;press left
+    Send, {%key% down}       ;press left
     Sleep, 20
 
     Send, {Space down}   ;press cross
@@ -57,19 +57,37 @@ jump_cancel() {
     Send, {LButton up}   ;release square
     Sleep, 20
 
-    Send, {a up}         ;release left
+    Send, {%key% up}         ;release left
     Sleep, 33
 }
 
 F1::
     first_jump()
-    air_kick()
-    jump_cancel()
-    air_kick()
-    jump_cancel()
-    air_kick()
-    jump_cancel()
-    air_kick()
-    jump_cancel()
+    Loop, 4 {
+        air_kick("a")
+        jump_cancel("a")
+    }
 
+return
+
+F2::
+    first_jump()
+    Loop, 4 {
+        air_kick("d")
+        jump_cancel("d")
+    }
+
+return
+
+F3::
+    first_jump()
+    Loop, 4 {
+        air_kick("a", 100)
+        jump_cancel("w")
+    }
+
+return
+
+Esc::
+    Reload
 return
