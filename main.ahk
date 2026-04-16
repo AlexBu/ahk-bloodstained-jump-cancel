@@ -1,4 +1,5 @@
 #NoEnv
+#SingleInstance
 SendMode Input
 SetWorkingDir %A_ScriptDir%
 
@@ -88,6 +89,13 @@ F3::
 
 return
 
-Esc::
-    Reload
+F4::
+    first_jump()
+    Loop {
+        air_kick("d", 100)
+        jump_cancel("w")
+        if GetKeyState("F5", "P")
+            break
+    }
+
 return
