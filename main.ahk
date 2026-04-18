@@ -3,9 +3,15 @@
 SendMode Input
 SetWorkingDir %A_ScriptDir%
 
-first_jump() {
+first_jump(key :="w") {
     Send, {Space down}   ;press cross
-    Sleep, 430
+    Sleep, 33
+
+    Send, {%key% down}   ;press direction
+    Sleep, 380
+
+    Send, {%key% up}     ;release direction
+    Sleep, 20
 
     Send, {Space up}     ;release cross
     Sleep, 20
@@ -62,33 +68,48 @@ jump_cancel(key) {
     Sleep, 33
 }
 
+;F1: move left
+;F2: move right
+;F3: move upward while facing left
+;F4: move upward while facing right
+
+;move left
 F1::
-    first_jump()
-    Loop, 4 {
+    first_jump("a")
+    Loop {
         air_kick("a")
         jump_cancel("a")
+        if GetKeyState("F5", "P")
+            break
     }
 
 return
 
+;move right
 F2::
-    first_jump()
-    Loop, 4 {
+    first_jump("d")
+    Loop {
         air_kick("d")
         jump_cancel("d")
+        if GetKeyState("F5", "P")
+            break
     }
 
 return
 
+;move upward while facing left
 F3::
     first_jump()
-    Loop, 4 {
+    Loop {
         air_kick("a", 100)
         jump_cancel("w")
+        if GetKeyState("F5", "P")
+            break
     }
 
 return
 
+;move upward while facing right
 F4::
     first_jump()
     Loop {
