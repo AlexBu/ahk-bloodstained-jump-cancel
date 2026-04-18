@@ -86,13 +86,28 @@ F1::
 return
 
 ;move right
+
+;F6: change direction to left
+;F7: change direction to right
+;F5: stop
+
 F2::
+    Dir2 := "d"
     first_jump("d")
     Loop {
-        air_kick("d")
-        jump_cancel("d")
-        if GetKeyState("F5", "P")
+        air_kick(Dir2)
+        jump_cancel(Dir2)
+        air_kick(Dir2)
+        jump_cancel(Dir2)
+        if GetKeyState("F6", "P") {
+            Dir2 := "a"
+        } else if GetKeyState("F7", "P") {
+            Dir2 := "d"
+        } else if GetKeyState("F5", "P") {
             break
+        } else {
+            ;
+        }
     }
 
 return
