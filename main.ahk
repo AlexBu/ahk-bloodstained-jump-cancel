@@ -68,6 +68,20 @@ jump_cancel(key) {
     Sleep, 33
 }
 
+jump_combo(Dir, delay) {
+    first_jump(Dir)
+    Loop {
+        air_kick(Dir, delay)
+        jump_cancel(Dir)
+        if GetKeyState("F6", "P")
+            Dir := "a"
+        if GetKeyState("F7", "P")
+            Dir := "d"
+        if GetKeyState("F5", "P")
+            break
+    }
+}
+
 ;F1: move left
 ;F2: move right
 ;F3: move upward while facing left
@@ -75,14 +89,7 @@ jump_cancel(key) {
 
 ;move left
 F1::
-    first_jump("a")
-    Loop {
-        air_kick("a")
-        jump_cancel("a")
-        if GetKeyState("F5", "P")
-            break
-    }
-
+    jump_combo("a", 333)
 return
 
 ;move right
@@ -92,46 +99,15 @@ return
 ;F5: stop
 
 F2::
-    Dir2 := "d"
-    first_jump("d")
-    Loop {
-        air_kick(Dir2)
-        jump_cancel(Dir2)
-        air_kick(Dir2)
-        jump_cancel(Dir2)
-        if GetKeyState("F6", "P") {
-            Dir2 := "a"
-        } else if GetKeyState("F7", "P") {
-            Dir2 := "d"
-        } else if GetKeyState("F5", "P") {
-            break
-        } else {
-            ;
-        }
-    }
-
+    jump_combo("d", 333)
 return
 
 ;move upward while facing left
 F3::
-    first_jump()
-    Loop {
-        air_kick("a", 100)
-        jump_cancel("w")
-        if GetKeyState("F5", "P")
-            break
-    }
-
+    jump_combo("a", 100)
 return
 
 ;move upward while facing right
 F4::
-    first_jump()
-    Loop {
-        air_kick("d", 100)
-        jump_cancel("w")
-        if GetKeyState("F5", "P")
-            break
-    }
-
+    jump_combo("d", 100)
 return
